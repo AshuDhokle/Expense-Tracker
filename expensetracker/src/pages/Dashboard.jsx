@@ -7,6 +7,16 @@ import { login } from '../features/userSlice'
 import Banner from '../components/Banner'
 import DashboardTabs from '../components/DashboardTabs'
 import Axios from 'axios'
+import { TailSpin } from 'react-loader-spinner'
+;<TailSpin
+  height="80"
+  width="80"
+  radius="9"
+  color="red"
+  ariaLabel="loading"
+  wrapperStyle
+  wrapperClass
+/>
 const Dashboard = () => {
   const dispatch = useDispatch(); 
   let user = useUser();
@@ -32,14 +42,20 @@ const Dashboard = () => {
   
   
   return (
-    <div className=' flex flex-col items-center h-screen backgroundImg'>
+    <div>
     <Navbar/>
+    <div className=' flex flex-col items-center h-screen backgroundImg'>
     { 
-      (user.isLoaded && user.isSignedIn )
-       ? <DashboardTabs/> 
-        : <Banner />
+      (user.isLoaded  )
+       ?(
+          user.isSignedIn?  
+          <DashboardTabs/>
+          :<Banner />
+        ) 
+        : <TailSpin />
     }
     
+    </div>
     </div> 
   )
 }
