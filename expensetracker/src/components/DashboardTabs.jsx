@@ -3,7 +3,7 @@ import { Button, Tabs, Tab, Box, useMediaQuery, useTheme } from '@mui/material';
 import EditSalary from './EditSalary';
 import FinancialRecordList from './financialRecordList';
 import FinancialRecordForm from './financialRecordForm';
-import AccountDetails from './AccountDetails';
+import Analysis from './Analysis';
 
 const TabPanel = ({ children, value, index }) => {
   return (
@@ -67,7 +67,7 @@ const DashboardTabs = () => {
               <Tabs value={value} onChange={handleTabChange} centered sx={{ p:'2px',width:500}} textColor="primary" indicatorColor="secondary">
                 <Tab label="Record List" />
                 <Tab label="Record Form" />
-                <Tab label="Account Details" />
+                <Tab label="Analysis" />
               </Tabs>
               <TabPanel value={value} index={0}>
                 <FinancialRecordList />
@@ -76,7 +76,7 @@ const DashboardTabs = () => {
                 <FinancialRecordForm />
               </TabPanel>
               <TabPanel value={value} index={2}>
-                <AccountDetails />
+                <Analysis />
               </TabPanel>
             </div>
           ) : (
@@ -85,13 +85,13 @@ const DashboardTabs = () => {
               <div className='flex flex-col items-center justify-center'>
                 <Tabs value={value} onChange={handleTabChange} centered sx={{ p:'2px',width:500}} textColor="primary" indicatorColor="secondary">
                 <Tab label="Record List"  sx={{color:'#00215E'}}/>
-                <Tab label="Account Details" sx={{color:'#00215E'}}/>
+                <Tab label="Analysis" sx={{color:'#00215E'}}/>
               </Tabs>
               <TabPanel value={value} index={0}>
                 <FinancialRecordList />
               </TabPanel>
               <TabPanel value={value} index={1}>
-                <AccountDetails />
+                <Analysis />
               </TabPanel>
               </div>
             </div>

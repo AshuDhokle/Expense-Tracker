@@ -6,7 +6,7 @@ import { selectExpense } from '../features/expenseRecordSlice';
 import { useUser } from '@clerk/clerk-react';
 import Dougunut from './Dogunut';
 import Dougunut2 from './Dougnut2';
-const AccountDetails = () => {
+const Analysis = () => {
   const { isLoaded, isSignedIn } = useUser();
   const records = useSelector(selectExpense)
   const [totalEarned,setTotalEarned] = useState(0);
@@ -56,11 +56,12 @@ const AccountDetails = () => {
   },[records])
   return (
     <div className=' bg-white shadow-2xl rounded-2xl p-4 w-fit h-max  '>
-      <Typography variant='h5' color={'#5AB2FF'} fontWeight={600} sx={{background:'#686D76',pl:2}} borderRadius={1}>Details</Typography>
+      <Typography variant='h5' color={'#5AB2FF'} fontWeight={600} sx={{}} borderRadius={1}>Analysis</Typography>
+      <hr className=' text-gray-600'/>
       <div className='flex flex-col'>
       <Button sx={{width:'fit',color:'green', fontSize:15, justifyContent:'flex-start'}} >Earned: {totalEarned}/- </Button>
       <Button sx={{width:'fit',color:'red', fontSize:15, justifyContent:'flex-start'}} >Spent: {totalSpent}/- </Button>
-      <Button sx={{width:'fit',color:'#615EFC', fontSize:15, justifyContent:'flex-start'}} >Left: {totalEarned-totalSpent}/- </Button>
+      <Button sx={{width:'fit',color:'#615EFC', fontSize:15, justifyContent:'flex-start'}} >Remaining: {totalEarned-totalSpent}/- </Button>
       </div>
       <Button sx={{m:1}} variant='contained' color='success' onClick={()=>{setIsTotalOpen(true); setIsEarnedOpen(false); setIsSpentOpen(false)}}>Total</Button>
       <Button sx={{m:1}} variant='contained'  onClick={()=>{setIsTotalOpen(false); setIsEarnedOpen(true); setIsSpentOpen(false)}}>Earned</Button>
@@ -92,4 +93,4 @@ const AccountDetails = () => {
   )
 }
 
-export default AccountDetails
+export default Analysis

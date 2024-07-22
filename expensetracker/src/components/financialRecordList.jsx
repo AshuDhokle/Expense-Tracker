@@ -42,7 +42,8 @@ const FinancialRecordList = () => {
 
   return (
     <Box sx={{ p:'10px', my:'10px',width:'450px',justifyContent:'center',background:'white' , height:'fit', borderRadius:5}} boxShadow={10}>
-       <Typography variant='h5' color={'#5AB2FF'} borderRadius={1} sx={{background:'#686D76',pl:2}} fontWeight={600} >Records</Typography>
+       <Typography variant='h5' color={'#5AB2FF'} borderRadius={1} sx={{pl:2}} fontWeight={600} >Records</Typography>
+       <hr className=' text-gray-600'/>
        <List  sx={{background:''}}>
        {
         currentRecord.map((item,idx)=>( 

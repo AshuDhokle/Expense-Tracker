@@ -39,7 +39,8 @@ const financialRecordForm = ({marginTop,marginLeft}) => {
 
   return (
     <div className="form-container bg-white p-4 rounded-2xl shadow-2xl h-max w-fit my-5" style={{marginTop:`${marginTop}px`,marginLeft:`${marginLeft}px`}}>
-      <Typography variant='h5' color={'#5AB2FF'} fontWeight={600} borderRadius={1} sx={{background:'#686D76',pl:2}}> Add Record </Typography>
+      <Typography variant='h5' color={'#5AB2FF'} fontWeight={600} borderRadius={1} sx={{pl:2}}> Add Record </Typography>
+      <hr className=' text-gray-600'/>
       <form className='grid grid-cols-1 md:grid-cols-2'>
         <div className="form-field m-4">
           <TextField id='' label='Description' variant='standard' value={description}
