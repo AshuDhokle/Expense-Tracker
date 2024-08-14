@@ -2,7 +2,7 @@ import React from 'react'
 import { AppBar,Toolbar,IconButton ,Typography} from '@mui/material'
 import { UserButton, useUser,SignInButton,SignUpButton,SignedOut,SignedIn } from '@clerk/clerk-react'
 const Navbar = () => {
-    const user = useUser();
+    const {user} = useUser();
     const userButtonAppearance = {
       elements: {
         userButtonAvatarBox: "w-10 h-10", // Custom width and height

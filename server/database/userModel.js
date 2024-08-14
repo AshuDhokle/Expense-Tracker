@@ -1,5 +1,4 @@
 import Mongoose from 'mongoose';
-import { Expense } from './expenseModel.js';
 const user = Mongoose.Schema({
     userDetails : {
         type:Object,
@@ -12,8 +11,7 @@ const user = Mongoose.Schema({
     dateOfSalary:{
         type:Number,
         default:1, 
-    },
-    
+    },    
     userId:{
         type:String,
         required:true,

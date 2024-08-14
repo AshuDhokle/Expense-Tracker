@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Tabs, Tab, Box, useMediaQuery, useTheme } from '@mui/material';
-import EditSalary from './EditSalary';
-import FinancialRecordList from './financialRecordList';
-import FinancialRecordForm from './financialRecordForm';
-import Analysis from './Analysis';
+import FinancialRecordList from '../../components/financialRecordList';
+import FinancialRecordForm from '../../components/financialRecordForm';
+import Analysis from '../../components/Analysis';
+import IncomeDetails from '../../components/EditSalary';
 
 const TabPanel = ({ children, value, index }) => {
   return (
@@ -18,31 +18,43 @@ const TabPanel = ({ children, value, index }) => {
 };
 
 const DashboardTabs = () => {
-  const [value, setValue] = useState(0);
-  const [open, setOpen] = useState(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const isMediumScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
-
-  const handleTabChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  useEffect(()=>{
-    if(!isSmallScreen)
-    setValue(0);
-  },[isSmallScreen])
+  const [index,setIndex] = useState(0);
+  const changeIndex = (e,newValue) =>{
+    setIndex(newValue)
+  }
+  
   return (
-        <div className='w-full px-10'>
-          <Button
+    <div className='w-full flex flex-row' style={{height:"710px"}}>
+      <Tabs
+        orientation="vertical"
+        value={index}
+        onChange={changeIndex}
+        sx={{ backgroundColor:'#26355D', width:'200px',height:'100%' }}
+      >
+        <Tab label='Expenses' sx={{color:'white'}}/>
+        <Tab label='Income' sx={{color:'white'}} />
+        <Tab label='Bills' sx={{color:'white'}} />
+        <Tab label='Analysis' sx={{color:'white'}} />
+        
+      </Tabs> 
+      <div className='w-full flex flex-col items-center '>
+      <FinancialRecordList idx = {index} value={0}/>
+      <IncomeDetails idx ={index} value={1}/>
+      <Analysis idx={index} value={3} />
+      </div> 
+    </div>
+  );
+};
+
+export default DashboardTabs;
+
+
+const temp = () =>{
+  return(
+    <>
+    <Button
             variant="outlined"
             onClick={handleClickOpen}
             sx={{
@@ -96,9 +108,6 @@ const DashboardTabs = () => {
               </div>
             </div>
           )}
-        </div>
-
-  );
-};
-
-export default DashboardTabs;
+    </>
+  )
+}

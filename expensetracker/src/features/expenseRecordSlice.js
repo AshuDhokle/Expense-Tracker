@@ -23,9 +23,7 @@ export const expenseRecordSlice = createSlice({
            state.expenseRecord = newExpenseRecordArray;
            
         },
-        // updateRecord:(state,action)=>{
-           
-        // },
+
         deleteRecord:(state,action)=>{
            const body = action.payload.payload;
            let newExpenseRecordArray = state.expenseRecord;

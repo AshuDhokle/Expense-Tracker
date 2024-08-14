@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle,TextField } from '@mui/material'
+import { Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle,Divider,TextField } from '@mui/material'
 import { useUser } from '@clerk/clerk-react'
 import Axios from 'axios'
 
-const EditSalary = ({isOpen,handleClose}) => {
+const IncomeDetails = ({idx,value}) => {
     const user = useUser();
     //console.log(user);
     const [count,setCount] = useState(0);
@@ -27,27 +27,24 @@ const EditSalary = ({isOpen,handleClose}) => {
     const response = await Axios.patch(`http://localhost:3000/user-router/${user.user.id}`,{salary,dateOfSalary})
   }
   return (
-    <Dialog
-        open={isOpen}
-        onClose={handleClose}
-        PaperProps={{
-          component: 'form',
-          
-        }}
+    value === idx &&
+    <div className='p-6 flex flex-col'>
+      <div className=' flex flex-col'>
+      <h1 className='my-2 text-xl font-semibold'>Salary Details</h1>
+      <div className='flex flex-row'>
+      <TextField label="Salary" sx={{m:2}} value={salary} onChange={(e)=>setSalary(e.target.value)}/> 
+      <TextField label="Date of Salary" sx={{m:2}} value={dateOfSalary} onChange={(e)=>setDateOfSalary(e.target.value)}/>
+      </div>
+      <Button type="submit" onClick={handleClick} 
+       sx={{alignSelf:'start'}}
       >
-        <DialogContent>
-          <DialogContentText>
-            Update Salary Details
-          </DialogContentText>
-          <TextField label="Salary" sx={{m:2}} value={salary} onChange={(e)=>setSalary(e.target.value)}/> 
-          <TextField label="Date of Salary" sx={{m:2}} value={dateOfSalary} onChange={(e)=>setDateOfSalary(e.target.value)}/>    
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={()=>handleClose()}>Cancel</Button>
-          <Button type="submit" onClick={handleClick}>Update</Button>
-        </DialogActions>
-      </Dialog>
+        Update
+      </Button>
+      <Divider/>
+      <img src='images/income.png' alt='add-income' className='size-12 rounded-full m-2 cursor-pointer hover:bg-gray-200' />
+      </div>
+    </div>
   )
 }
 
-export default EditSalary
+export default IncomeDetails

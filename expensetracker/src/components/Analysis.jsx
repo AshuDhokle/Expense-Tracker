@@ -6,7 +6,7 @@ import { selectExpense } from '../features/expenseRecordSlice';
 import { useUser } from '@clerk/clerk-react';
 import Dougunut from './Dogunut';
 import Dougunut2 from './Dougnut2';
-const Analysis = () => {
+const Analysis = ({idx,value}) => {
   const { isLoaded, isSignedIn } = useUser();
   const records = useSelector(selectExpense)
   const [totalEarned,setTotalEarned] = useState(0);
@@ -55,7 +55,8 @@ const Analysis = () => {
     }
   },[records])
   return (
-    <div className=' bg-white shadow-2xl rounded-2xl p-4 w-fit h-max  '>
+    idx === value && 
+    <div className='bg-white shadow-2xl rounded-2xl p-4 w-fit h-max'>
       <Typography variant='h5' color={'#5AB2FF'} fontWeight={600} sx={{}} borderRadius={1}>Analysis</Typography>
       <hr className=' text-gray-600'/>
       <div className='flex flex-col'>

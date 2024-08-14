@@ -4,14 +4,19 @@ import {useDispatch} from 'react-redux'
 import { addRecord } from '../features/expenseRecordSlice';
 import Axios from 'axios';
 import {TextField,Select, MenuItem,InputLabel,Button, Typography} from '@mui/material'
+import { MdPostAdd } from "react-icons/md";
+import { IoClose } from "react-icons/io5";
 
-const financialRecordForm = ({marginTop,marginLeft}) => {
+const FinancialRecordForm = ({marginTop,marginLeft}) => {
   const dispatch = useDispatch();
   const [description,setDescription] = useState("");
   const [amount,setAmount] = useState("");
   const [category,setCategory] = useState("");
   const [paymentMethod,setPaymentMethod] = useState("");
-  
+  const [isOpen,setIsOpen] = useState(false);
+  const handleClose = () =>{
+    setIsOpen(false)
+  }
   const user = useUser();
   
   const addrecord = async(body) =>{
@@ -38,8 +43,18 @@ const financialRecordForm = ({marginTop,marginLeft}) => {
   }
 
   return (
-    <div className="form-container bg-white p-4 rounded-2xl shadow-2xl h-max w-fit my-5" style={{marginTop:`${marginTop}px`,marginLeft:`${marginLeft}px`}}>
+    <div>
+    <MdPostAdd onClick={()=>setIsOpen(true)}
+      className='size-8 justify-self-center m-10 hover:text-gray-800'
+    />
+    {
+    isOpen && 
+    <div className="fixed z-10 top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-gray-800 bg-opacity-50" style={{marginTop:`${marginTop}px`,marginLeft:`${marginLeft}px`}}>
+      <div className='bg-white p-2 rounded-md'>
+      <div className='flex flex-row items-center justify-between'>
       <Typography variant='h5' color={'#5AB2FF'} fontWeight={600} borderRadius={1} sx={{pl:2}}> Add Record </Typography>
+      <IoClose onClick={handleClose} className='size-8'/>
+      </div>
       <hr className=' text-gray-600'/>
       <form className='grid grid-cols-1 md:grid-cols-2'>
         <div className="form-field m-4">
@@ -89,9 +104,11 @@ const financialRecordForm = ({marginTop,marginLeft}) => {
         </div>
         <Button variant="contained" onClick={handleSubmit}>Add Record</Button>
       </form>
-     
+      </div>
+      </div> 
+    }
     </div>
   )
 }
 
-export default financialRecordForm
+export default FinancialRecordForm
