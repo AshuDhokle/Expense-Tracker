@@ -28,7 +28,7 @@ const IncomeDetails = ({idx,value}) => {
   }
   return (
     value === idx &&
-    <div className='p-6 flex flex-col'>
+    <div className='w-full p-6 flex flex-col justify-start'>
       <div className=' flex flex-col'>
       <h1 className='my-2 text-xl font-semibold'>Salary Details</h1>
       <div className='flex flex-row'>

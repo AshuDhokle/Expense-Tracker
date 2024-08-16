@@ -6,6 +6,8 @@ import { selectExpense } from '../features/expenseRecordSlice';
 import { useUser } from '@clerk/clerk-react';
 import Dougunut from './Dogunut';
 import Dougunut2 from './Dougnut2';
+import BarChart from './BarChart'
+import {ChartColors} from '../utils/chartColor'
 const Analysis = ({idx,value}) => {
   const { isLoaded, isSignedIn } = useUser();
   const records = useSelector(selectExpense)
@@ -56,39 +58,25 @@ const Analysis = ({idx,value}) => {
   },[records])
   return (
     idx === value && 
-    <div className='bg-white shadow-2xl rounded-2xl p-4 w-fit h-max'>
+    <div className='bg-white p-4 w-full h-full'>
       <Typography variant='h5' color={'#5AB2FF'} fontWeight={600} sx={{}} borderRadius={1}>Analysis</Typography>
+      <h1  >Earned: {totalEarned}/- </h1>
+      <h1  >Spent: {totalSpent}/- </h1>
+      <h1  >Remaining: {totalEarned-totalSpent}/- </h1>
       <hr className=' text-gray-600'/>
-      <div className='flex flex-col'>
-      <Button sx={{width:'fit',color:'green', fontSize:15, justifyContent:'flex-start'}} >Earned: {totalEarned}/- </Button>
-      <Button sx={{width:'fit',color:'red', fontSize:15, justifyContent:'flex-start'}} >Spent: {totalSpent}/- </Button>
-      <Button sx={{width:'fit',color:'#615EFC', fontSize:15, justifyContent:'flex-start'}} >Remaining: {totalEarned-totalSpent}/- </Button>
-      </div>
+      <div className='flex flex-col items-center justify-center'>
+      <div className='my-5'>
       <Button sx={{m:1}} variant='contained' color='success' onClick={()=>{setIsTotalOpen(true); setIsEarnedOpen(false); setIsSpentOpen(false)}}>Total</Button>
       <Button sx={{m:1}} variant='contained'  onClick={()=>{setIsTotalOpen(false); setIsEarnedOpen(true); setIsSpentOpen(false)}}>Earned</Button>
       <Button sx={{m:1}} variant='contained' color='error' onClick={()=>{setIsTotalOpen(false); setIsEarnedOpen(false); setIsSpentOpen(true)}}>Spent</Button>
+      </div>
       <div>
       <div className=''>
       {isTotalOpen && <Dougunut Data={Data} Categories={['Earned','Spent']} colors={['rgba(0, 217, 255, 0.8)','rgba(255, 53, 34, 0.8)']}/> }
-      {isEarnedOpen &&  <Dougunut2 Data={earnedData.temp} colors={[
-  'rgba(255, 178, 34, 0.8)',
-  'rgba(255, 83, 205, 0.8)',
-  'rgba(255, 255, 0, 0.8)',
-  'rgba(84, 206, 125, 0.8)',
-  'rgba(255, 0, 251, 0.49)',
-  'rgba(62, 222, 87, 0.9)',
-  'rgba(30, 188, 248, 1.0)'
-]} />}
-      {isSpentOpen &&  <Dougunut2 Data={spentData.temp} colors={[
-   'rgba(255, 178, 34, 0.8)',
-   'rgba(255, 83, 205, 0.8)',
-   'rgba(255, 255, 0, 0.8)',
-   'rgba(84, 206, 125, 0.8)',
-   'rgba(255, 0, 251, 0.49)',
-   'rgba(62, 222, 87, 0.9)',
-   'rgba(30, 188, 248, 1.0)'
-]}/>}
-</div>
+      {isEarnedOpen &&  <BarChart Data={earnedData.temp} colors={ChartColors} />}
+      {isSpentOpen &&  <BarChart Data={spentData.temp} colors={ChartColors}/>}
+      </div>
+      </div>
       </div>
     </div>
   )
